@@ -1,0 +1,25 @@
+<!--引入towxml模版入口文件，并使用模版-->
+<import src="/towxml/entry.wxml"/>
+<view>
+    <image src="/imgs/Wedges-3s-200px.svg" class="loading"  wx:if="{{isLoading}}"></image>
+ <view class="book" wx:else>
+  <view>
+    <template is="entry" data="{{...BookContent}}"/>
+  </view>
+  <!--底部功能菜单-->
+  <view class="menu">
+    <view class="iconfont icon-prev"></view>
+    <view class="iconfont icon-mulu" bindtap="toggleCatalog"></view>
+    <view class="iconfont icon-zitifangda"></view>
+    <view class="iconfont icon-zitisuoxiao"></view>
+    <view class="iconfont icon-next"></view>
+  </view>
+  <!--侧边目录-->
+  <scroll-view scroll-y class="catalog-menu" wx:if="{{isShow}}" bindtap="toggleCatalog">
+      <view class="catalog-item" wx:for="{{catalogData}}" wx:for-item="item" wx:key="{{index}}"  bindtap="handGet" data-id="{{item._id}}">{{item.title}}
+      </view>
+  </scroll-view>
+  <!--遮罩层-->
+  <view class="mask" wx:if="{{isShow}}" bindtap="toggleCatalog"></view>
+</view>
+</view>
